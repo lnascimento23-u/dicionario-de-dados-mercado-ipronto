@@ -1,0 +1,46 @@
+:root{--navy:#000080;--bg:#f4f5fa;--card:#fff;--text:#111;--muted:#555;--line:#d5d8e6;--head:#000080;--headtx:#fff;--hover:#eef0fb;--side:#fff}
+[data-theme=dark]{--bg:#000;--card:#0d0d1a;--text:#e8e9f5;--muted:#a0a3bd;--line:#2a2b45;--head:#1a1a8c;--headtx:#fff;--hover:#15152b;--side:#05050f}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;font:15px/1.5 "Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--navy);color:#fff}
+.brand{flex:1;display:flex;flex-direction:column;line-height:1.2}.brand span{font-size:.85rem;opacity:.8}
+.btn{border:1px solid var(--navy);background:transparent;color:inherit;padding:8px 14px;border-radius:6px;font:inherit;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.primary{background:var(--navy);color:#fff}.btn.primary:hover{background:#0000b0}
+.btn.ghost{border-color:rgba(255,255,255,.5);color:#fff}.btn.ghost:hover{background:rgba(255,255,255,.15)}
+.menu-btn{display:none}
+.layout{display:flex}
+.sidebar{width:270px;flex:none;position:sticky;top:57px;align-self:flex-start;height:calc(100vh - 57px);overflow:auto;padding:12px;background:var(--side);border-right:1px solid var(--line)}
+.sidebar a{display:block;padding:5px 8px;border-radius:4px;color:var(--text);text-decoration:none;font-size:.9rem;word-break:break-all}
+.sidebar a:hover,.sidebar a.active{background:var(--hover);color:var(--navy)}[data-theme=dark] .sidebar a:hover{color:#9aa0ff}
+.side-title{margin:14px 8px 4px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.main{flex:1;min-width:0;padding:20px;max-width:1500px}
+.card{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:8px;padding:18px;margin-bottom:20px}
+h2{margin:0 0 8px;color:var(--navy)}[data-theme=dark] h2{color:#9aa0ff}h3{margin:16px 0 8px}
+.ident{display:grid;grid-template-columns:120px 1fr;gap:6px 14px;margin:0}.ident dt{font-weight:700}.ident dd{margin:0}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#search{flex:1;min-width:220px;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--text);font:inherit}
+.muted{color:var(--muted);font-size:.85rem}
+.table-wrap{overflow-x:auto}
+table.dd{width:100%;border-collapse:collapse;font-size:.85rem;min-width:980px}
+.dd th{background:var(--head);color:var(--headtx);text-align:left;padding:8px;position:sticky;top:0}
+.dd td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+.dd tbody tr:hover{background:var(--hover)}
+.dd td:first-child{font-family:Consolas,monospace;font-weight:700;white-space:nowrap}
+.dd td.type{font-family:Consolas,monospace;white-space:nowrap}
+.dd strong.k{color:var(--navy)}[data-theme=dark] .dd strong.k{color:#9aa0ff}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.75rem;font-weight:700;color:#000}
+.badge.dps{background:#e53935;color:#fff}.badge.dp{background:#fbc02d}.badge.na{background:#43a047;color:#fff}
+.tbl-head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between}
+.tag{font-size:.75rem;color:var(--muted)}
+mark{background:#ffe08a;color:#000;padding:0 2px}
+.foot{padding:10px 0 30px}
+.modal{position:fixed;inset:0;z-index:50;background:#000;display:flex;flex-direction:column}.modal[hidden]{display:none}
+.modal-bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;padding:8px 14px;background:var(--navy);color:#fff}
+.viewport{flex:1;overflow:hidden;background:#fff;cursor:grab;touch-action:none}.viewport:active{cursor:grabbing}
+.viewport img{max-width:none;display:block;user-select:none}
+@media(max-width:900px){
+ .menu-btn{display:inline-block}
+ .sidebar{position:fixed;z-index:30;top:57px;left:0;transform:translateX(-100%);transition:transform .2s;width:80%;max-width:300px;box-shadow:2px 0 12px rgba(0,0,0,.4)}
+ .sidebar.open{transform:none}
+ .main{padding:12px}.ident{grid-template-columns:1fr}
+}
