@@ -161,8 +161,8 @@ function openDer(){
     $('#derErr').hidden=true;img.hidden=false;
     if(pz)pz.destroy();
     const s=Math.min(vp.clientWidth/img.naturalWidth,vp.clientHeight/img.naturalHeight);
-    const x=(vp.clientWidth-img.naturalWidth*s)/2/s,y=(vp.clientHeight-img.naturalHeight*s)/2/s;
-    pz=Panzoom(img,{origin:'0 0',startScale:s,startX:x,startY:y,minScale:s/4,maxScale:12,cursor:'grab'});
+    const x=(vp.clientWidth-img.naturalWidth)/2/s,y=(vp.clientHeight-img.naturalHeight)/2/s;
+    pz=Panzoom(img,{startScale:s,startX:x,startY:y,minScale:s/4,maxScale:12,cursor:'grab'});
   };
   img.onerror=()=>{img.hidden=true;$('#derErr').hidden=false;};
   if(img.complete&&img.naturalWidth)init();else img.onload=init;
@@ -189,5 +189,3 @@ document.addEventListener('DOMContentLoaded',()=>{
   $('#menuBtn').onclick=()=>sb.classList.toggle('open');
   sb.addEventListener('click',e=>{if(e.target.tagName==='A')sb.classList.remove('open')});
 });
-
-
