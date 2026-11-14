@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dicionário de Dados - Mercado iPronto</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <button id="menuBtn" class="btn ghost menu-btn" aria-label="Abrir menu">Menu</button>
+  <div class="brand">
+    <strong>Dicionário de Dados - Sistema de Gestão de Estoque e Compras</strong>
+    <span>Mercado iPronto</span>
+  </div>
+  <button id="themeBtn" class="btn ghost" aria-label="Alternar tema">Modo escuro</button>
+</header>
+
+<div class="layout">
+  <aside id="sidebar" class="sidebar">
+    <p class="side-title">Navegação</p>
+    <a href="#identificacao">Identificação</a>
+    <a href="#painel">Painel de controle</a>
+    <p class="side-title">Tabelas (<span id="tblCount">0</span>)</p>
+    <nav id="tableNav"></nav>
+  </aside>
+
+  <main class="main">
+    <section id="identificacao" class="card">
+      <h2>Identificação do Projeto</h2>
+      <dl class="ident">
+        <dt>Escopo</dt>
+        <dd>O sistema abrange a gestão de estoque, as entradas de mercadorias por NF-e, o vínculo entre produtos e fornecedores com comparação de preços de compra, o controle de validade por lote, o histórico de movimentações e a auditoria de usuários do Mercado iPronto, mercadinho de bairro de loja única. O objetivo é reduzir contagens e cálculos manuais, evitar divergências entre estoque físico e registrado e embasar decisões de compra em dados.</dd>
+        <dt>Tecnologia</dt><dd>MySQL (InnoDB)</dd>
+        <dt>Orientador</dt><dd>Prof. Dr. Diego Carvalho</dd>
+        <dt>Equipe</dt><dd>Grupo 7 - Mercado iPronto</dd>
+      </dl>
+      <h3>Responsáveis</h3>
+      <div class="table-wrap">
+        <table class="dd">
+          <thead><tr><th>Integrante</th><th>Papel de Governança</th><th>Responsabilidade</th></tr></thead>
+          <tbody>
+            <tr><td>Fernando Freitas</td><td><strong>Data Owner</strong></td><td>Responde pelo negócio dos dados: define regras, finalidade, classificação e quem pode acessar.</td></tr>
+            <tr><td>Tawan Kerche</td><td><strong>Data Steward</strong></td><td>Zela pela qualidade e documentação: mantém este dicionário, a linhagem e a consistência entre requisitos, DER e DDL.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="painel" class="card">
+      <h2>Painel de Controle</h2>
+      <div class="controls">
+        <a class="btn primary" href="docs/Especificacao_de_Requisitos.pdf" download>Baixar Especificação de Requisitos (PDF)</a>
+        <button id="derBtn" class="btn primary">Abrir DER</button>
+        <input id="search" type="search" placeholder="Filtrar por tabela ou coluna..." aria-label="Pesquisar">
+      </div>
+      <p id="resultInfo" class="muted"></p>
+    </section>
+
+    <div id="dictionary"></div>
+    <p id="empty" class="card muted" hidden>Nenhuma tabela ou coluna corresponde à pesquisa.</p>
+    <footer class="foot muted">Controle de acesso e linhagem foram inferidos a partir dos requisitos e dos nomes das colunas; tipos e chaves seguem o DDL. Revisar com o Data Owner antes da publicação.</footer>
+  </main>
+</div>
+
+<div id="modal" class="modal" hidden>
+  <div class="modal-bar">
+    <strong>Diagrama Entidade-Relacionamento</strong>
+    <div>
+      <button id="zIn" class="btn ghost">Zoom +</button>
+      <button id="zOut" class="btn ghost">Zoom -</button>
+      <button id="zReset" class="btn ghost">Reset</button>
+      <button id="closeDer" class="btn ghost">Fechar</button>
+    </div>
+  </div>
+  <div id="viewport" class="viewport"><img id="derImg" src="assets/der.png" alt="Diagrama Entidade-Relacionamento do Mercado iPronto" draggable="false"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
