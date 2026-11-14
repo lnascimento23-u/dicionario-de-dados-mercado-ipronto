@@ -156,16 +156,20 @@ function theme(m){document.documentElement.dataset.theme=m;$('#themeBtn').textCo
 let pz=null;
 function openDer(){
   $('#modal').hidden=false;document.body.style.overflow='hidden';
-  const img=$('#derImg');
+  const img=$('#derImg'),vp=$('#viewport');
   const init=()=>{
+    $('#derErr').hidden=true;img.hidden=false;
     if(pz)pz.destroy();
-    pz=Panzoom(img,{maxScale:10,minScale:0.05,contain:false,cursor:'grab'});
-    const vp=$('#viewport');
     const s=Math.min(vp.clientWidth/img.naturalWidth,vp.clientHeight/img.naturalHeight);
-    pz.zoom(s,{animate:false});pz.pan(0,0,{animate:false});
-    img._fit=s;
+    const x=(vp.clientWidth-img.naturalWidth*s)/2/s,y=(vp.clientHeight-img.naturalHeight*s)/2/s;
+    pz=Panzoom(img,{origin:'0 0',startScale:s,startX:x,startY:y,minScale:s/4,maxScale:12,cursor:'grab'});
   };
+  img.onerror=()=>{img.hidden=true;$('#derErr').hidden=false;};
   if(img.complete&&img.naturalWidth)init();else img.onload=init;
+}
+function zoomBtn(dir){
+  if(!pz)return;const r=$('#viewport').getBoundingClientRect();
+  pz.zoomToPoint(pz.getScale()*(dir>0?1.4:1/1.4),{clientX:r.left+r.width/2,clientY:r.top+r.height/2});
 }
 function closeDer(){$('#modal').hidden=true;document.body.style.overflow='';}
 
@@ -175,14 +179,15 @@ document.addEventListener('DOMContentLoaded',()=>{
   theme(m);
   $('#themeBtn').onclick=()=>theme(document.documentElement.dataset.theme==='dark'?'light':'dark');
   $('#search').addEventListener('input',filter);
-  $('#derBtn').onclick=openDer;$('#derInline').onclick=openDer;$('#closeDer').onclick=closeDer;
-  $('#zIn').onclick=()=>pz&&pz.zoomIn();
-  $('#zOut').onclick=()=>pz&&pz.zoomOut();
-  $('#zReset').onclick=()=>{if(!pz)return;const i=$('#derImg');pz.reset({animate:false});pz.zoom(i._fit||1,{animate:false});pz.pan(0,0,{animate:false});};
+  $('#derBtn').onclick=openDer;$('#closeDer').onclick=closeDer;
+  $('#zIn').onclick=()=>zoomBtn(1);
+  $('#zOut').onclick=()=>zoomBtn(-1);
+  $('#zReset').onclick=()=>pz&&pz.reset({animate:false});
   $('#viewport').addEventListener('wheel',e=>{if(pz)pz.zoomWithWheel(e)},{passive:false});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDer()});
   const sb=$('#sidebar');
   $('#menuBtn').onclick=()=>sb.classList.toggle('open');
   sb.addEventListener('click',e=>{if(e.target.tagName==='A')sb.classList.remove('open')});
 });
+
 
