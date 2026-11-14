@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   theme(m);
   $('#themeBtn').onclick=()=>theme(document.documentElement.dataset.theme==='dark'?'light':'dark');
   $('#search').addEventListener('input',filter);
-  $('#derBtn').onclick=openDer;$('#closeDer').onclick=closeDer;
+  $('#derBtn').onclick=openDer;$('#derInline').onclick=openDer;$('#closeDer').onclick=closeDer;
   $('#zIn').onclick=()=>pz&&pz.zoomIn();
   $('#zOut').onclick=()=>pz&&pz.zoomOut();
   $('#zReset').onclick=()=>{if(!pz)return;const i=$('#derImg');pz.reset({animate:false});pz.zoom(i._fit||1,{animate:false});pz.pan(0,0,{animate:false});};
@@ -185,3 +185,4 @@ document.addEventListener('DOMContentLoaded',()=>{
   $('#menuBtn').onclick=()=>sb.classList.toggle('open');
   sb.addEventListener('click',e=>{if(e.target.tagName==='A')sb.classList.remove('open')});
 });
+
